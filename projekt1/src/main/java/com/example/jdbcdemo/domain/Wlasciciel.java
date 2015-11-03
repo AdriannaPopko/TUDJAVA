@@ -31,18 +31,18 @@ public class Wlasciciel {
         return nazwisko;
     }
 
-    public void getImie(String imie) {
+    public void setImie(String imie) {
         this.imie = imie;
     }
 
-    public void getNazwisko(String nazwisko) {
+    public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
     }
 
     public int getNr() {
         return nr_tel;
     }
-    public void getNr(int nr_tel) {
+    public void setNr(int nr_tel) {
         this.nr_tel = nr_tel;
     }
 
