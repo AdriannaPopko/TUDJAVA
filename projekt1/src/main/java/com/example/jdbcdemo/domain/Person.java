@@ -1,19 +1,21 @@
 package com.example.jdbcdemo.domain;
 
-public class Person {
+public class Opiekun {
 	
 	private long id;
 	
-	private String name;
-	private int yob;
+	private String imie;
+	private String nazwisko;
+	private int nr_tel;
 	
-	public Person() {
+	public Opiekun() {
 	}
 	
-	public Person(String name, int yob) {
+	public Opiekun(String imie, String nazwisko, int nr_tel) {
 		super();
-		this.name = name;
-		this.yob = yob;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.nr_tel = nr_tel;
 	}
 	public long getId() {
 		return id;
@@ -21,17 +23,27 @@ public class Person {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getImie() {
+		return imie;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public String getNazwisko() {
+		return nazwisko;
 	}
-	public int getYob() {
-		return yob;
+
+	public void getImie(String imie) {
+		this.imie = imie;
 	}
-	public void setYob(int yob) {
-		this.yob = yob;
+
+	public void getNazwisko(String nazwisko) {
+		this.nazwisko = nazwisko;
+	}
+
+	public int getNr() {
+		return nr_tel;
+	}
+	public void getNr(int nr_tel) {
+		this.nr_tel = nr_tel;
 	}
 	
 }
