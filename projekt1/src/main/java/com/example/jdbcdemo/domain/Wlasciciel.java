@@ -2,7 +2,7 @@ package com.example.jdbcdemo.domain;
 
 public class Wlasciciel {
 
-    private long id;
+    private long wlasciciel_id;
 
     private String imie;
     private String nazwisko;
@@ -18,10 +18,10 @@ public class Wlasciciel {
         this.nr_tel = nr_tel;
     }
     public long getId() {
-        return id;
+        return wlasciciel_id;
     }
     public void setId(long id) {
-        this.id = id;
+        this.wlasciciel_id = id;
     }
     public String getImie() {
         return imie;
