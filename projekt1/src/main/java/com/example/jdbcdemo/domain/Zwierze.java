@@ -1,6 +1,6 @@
 package com.example.jdbcdemo.domain;
 
-public class Wlasciciel {
+public class Zwierze {
 
     private long id;
 
@@ -8,7 +8,7 @@ public class Wlasciciel {
     private String nazwisko;
     private int nr_tel;
 
-    public Wlasciciel() {
+    public Opiekun() {
     }
 
     public Opiekun(String imie, String nazwisko, int nr_tel) {
