@@ -35,11 +35,11 @@ public class Zwierze {
         return gatunek;
     }
 
-    public void getImie(String imie) {
+    public void setImie(String imie) {
         this.imie = imie;
     }
 
-    public void getGatunek(String gatunek) {
+    public void setGatunek(String gatunek) {
         this.gatunek = gatunek;
     }
 
@@ -47,7 +47,7 @@ public class Zwierze {
         return data_przyjecia;
     }
 
-    public void getData_przyjecia(String data_przyjecia) {
+    public void setData_przyjecia(String data_przyjecia) {
         this.data_przyjecia = data_przyjecia;
     }
 
@@ -63,7 +63,7 @@ public class Zwierze {
         return wlasciciel_id;
     }
 
-    public void getWlasciciel_id(long wlasciciel_id) {
+    public void setWlasciciel_id(long wlasciciel_id) {
         this.wlasciciel_id = wlasciciel_id;
     }
 

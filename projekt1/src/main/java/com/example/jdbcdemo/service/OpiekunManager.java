@@ -129,7 +129,7 @@ public class OpiekunManager {
 
 			while(rs.next()){
 				Opiekun o = new Opiekun();
-				o.setId(rs.getInt("opiekun_id"));
+				o.setId(rs.getLong("opiekun_id"));
 				o.setImie(rs.getString("imie"));
 				o.setNazwisko(rs.getString("nazwisko"));
 				o.setNr(rs.getInt("nr_tel"));

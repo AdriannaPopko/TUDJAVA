@@ -20,9 +20,10 @@ public class Opiekun {
 	public long getId() {
 		return opiekun_id;
 	}
-	public long setId(long opiekun_id) {
+	public void setId(long opiekun_id) {
 		this.opiekun_id = opiekun_id;
 	}
+
 	public String getImie() {
 		return imie;
 	}

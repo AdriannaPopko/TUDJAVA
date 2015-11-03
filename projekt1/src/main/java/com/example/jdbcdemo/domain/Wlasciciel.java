@@ -11,7 +11,7 @@ public class Wlasciciel {
     public Wlasciciel() {
     }
 
-    public Opiekun(String imie, String nazwisko, int nr_tel) {
+    public Wlasciciel(String imie, String nazwisko, int nr_tel) {
         super();
         this.imie = imie;
         this.nazwisko = nazwisko;
