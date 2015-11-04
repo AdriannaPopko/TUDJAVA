@@ -73,7 +73,7 @@ public class OpiekunManager {
 		}
 	}
 
-	public int UsunOpiekuna(Opiekun opiekun) {
+	public int usunOpiekuna(Opiekun opiekun) {
 		int count = 0;
 		try {
 			UsunOpiekuna.setLong(1, opiekun.getId());

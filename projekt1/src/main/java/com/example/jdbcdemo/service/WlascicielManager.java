@@ -73,7 +73,7 @@ public class WlascicielManager {
         }
     }
 
-    public int UsunWlasciciela(Wlasciciel wlasciciel) {
+    public int usunWlasciciela(Wlasciciel wlasciciel) {
         int count = 0;
         try {
             UsunWlasciciela.setLong(1, wlasciciel.getId());
