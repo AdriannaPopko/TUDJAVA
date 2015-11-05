@@ -129,7 +129,7 @@ public class WlascicielManager {
 
             while(rs.next()){
                 Wlasciciel w = new Wlasciciel();
-                w.setId(rs.getLong("opiekun_id"));
+                w.setId(rs.getLong("wlasciciel_id"));
                 w.setImie(rs.getString("imie"));
                 w.setNazwisko(rs.getString("nazwisko"));
                 w.setNr(rs.getInt("nr_tel"));
