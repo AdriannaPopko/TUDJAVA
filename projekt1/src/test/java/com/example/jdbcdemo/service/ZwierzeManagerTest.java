@@ -6,81 +6,59 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.example.jdbcdemo.domain.Wlasciciel;
+import com.example.jdbcdemo.domain.Zwierze;
 
-public class WlascicielManagerTest {
+public class ZwierzeManagerTest {
+	ZwierzeManager zwierzeManager = new ZwierzeManager();
 
+	private final static String IMIE_1 = "Reksio";
+	private final static String GATUNEK_1 = "Pies";
+	private final static String DATA_PRZYJECIA_1 = "2015-09-22";
+	private final static Long opiekun_id = (long) 1;
+	private final static Long opiekun_id2 = (long) 2;
+	private final static Long wlasciciel_id = (long) 1;
 
-	WlascicielManager wlascicielManager = new WlascicielManager();
-	
-	private final static String IMIE_1 = "Anka";
-	private final static String NAZWISKO_1 = "Skakanka";
-	private final static int NR_TEL_1 = 789789789;
-
-	private final static String IMIE_2 = "Monika";
-	private final static String NAZWISKO_2 = "Ratownika";
-	private final static int NR_TEL_2 = 123123123;
-	
 	@Test
 	public void checkConnection(){
-		assertNotNull(wlascicielManager.getConnection());
+		assertNotNull(zwierzeManager.getConnection());
 	}
-	
+
 	@Test
-	public void checkAdding(){
+	public void checkAdd(){
+		Zwierze zw = new Zwierze(IMIE_1, GATUNEK_1, DATA_PRZYJECIA_1, opiekun_id, wlasciciel_id);
 
-		Wlasciciel wlasciciel = new Wlasciciel(IMIE_1, NAZWISKO_1, NR_TEL_1);
+		zwierzeManager.wyczyscZwierzeta();
+		assertEquals(1, zwierzeManager.dodajZwierze(zw));
 
-		wlascicielManager.wyczyscWlascicieli();
-		assertEquals(1,wlascicielManager.dodajWlasciciela(wlasciciel));
-		
-		List<Wlasciciel> wlasciciele = wlascicielManager.GetWlascicieli();
-		Wlasciciel wlascicielRetrieved = wlasciciele.get(0);
-		
-		assertEquals(IMIE_1, wlascicielRetrieved.getImie());
-		assertEquals(NAZWISKO_1, wlascicielRetrieved.getNazwisko());
-		assertEquals(NR_TEL_1, wlascicielRetrieved.getNr());
-		
 	}
 
 	@Test
 	public void checkUpdate(){
-		Wlasciciel wlasciciel = new Wlasciciel(IMIE_1, NAZWISKO_1, NR_TEL_1);
+		Zwierze zw = new Zwierze(IMIE_1, GATUNEK_1, DATA_PRZYJECIA_1, opiekun_id, wlasciciel_id);
 
-		wlascicielManager.wyczyscWlascicieli();
-		assertEquals(1,wlascicielManager.dodajWlasciciela(wlasciciel));
+		zwierzeManager.wyczyscZwierzeta();
+		assertEquals(1, zwierzeManager.dodajZwierze(zw));
 
-		List<Wlasciciel> wlasciciele = wlascicielManager.GetWlascicieli();
-		Wlasciciel wlascicielRetrieved = wlasciciele.get(0);
+		List<Zwierze> zwierzeta = zwierzeManager.GetZwierzeta();
+		Zwierze zwierzeRetrieved = zwierzeta.get(0);
 
-		wlascicielRetrieved.setImie(IMIE_2);
-		wlascicielRetrieved.setNazwisko(NAZWISKO_2);
-		wlascicielRetrieved.setNr(NR_TEL_2);
+		zwierzeRetrieved.setOpiekun_id(opiekun_id2);
 
+		assertEquals(1, zwierzeManager.updateZwierze(zwierzeRetrieved));
 
-		assertEquals(1, wlascicielManager.updateWlasciciel(wlascicielRetrieved));
+		List<Zwierze> zw2 = zwierzeManager.GetZwierzeta();
+		Zwierze zwierzeRetrieved2 = zw2.get(0);
 
-		List<Wlasciciel> wl = wlascicielManager.GetWlascicieli();
-		Wlasciciel wlascicielRetrieved2 = wl.get(0);
-
-		assertEquals(IMIE_2, wlascicielRetrieved2.getImie());
-		assertEquals(NAZWISKO_2, wlascicielRetrieved2.getNazwisko());
-		assertEquals(NR_TEL_2, wlascicielRetrieved2.getNr());
-		assertEquals(wlascicielRetrieved2.getId(), wlascicielRetrieved2.getId());
+		assertEquals(1, zwierzeManager.updateZwierze(zwierzeRetrieved));
 	}
 
 	@Test
-	public void checkDelete() {
-		Wlasciciel wlasciciel = new Wlasciciel(IMIE_1, NAZWISKO_1, NR_TEL_1);
+	public void checkDelete(){
+		Zwierze zw = new Zwierze(IMIE_1, GATUNEK_1, DATA_PRZYJECIA_1, opiekun_id, wlasciciel_id);
 
-		wlascicielManager.wyczyscWlascicieli();
-		assertEquals(1,wlascicielManager.dodajWlasciciela(wlasciciel));
-
-		List<Wlasciciel> wlasciciele = wlascicielManager.GetWlascicieli();
-		Wlasciciel wlascicielRetrieved = wlasciciele.get(0);
-
-		assertEquals(1, wlascicielManager.usunWlasciciela(wlascicielRetrieved));
+		List<Zwierze> zwierze = zwierzeManager.GetZwierzeta();
+		Zwierze zwierzeRetrieved = zwierze.get(0);
+		assertEquals(1, zwierzeManager.usunZwierze(zwierzeRetrieved));
 
 	}
-
 }
