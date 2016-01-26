@@ -17,59 +17,74 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.domain.Bouquet;
+
 @Entity
 @NamedQueries({ 
 	@NamedQuery(name = "owner.all", query = "Select o from Owner o"),
-	@NamedQuery(name = "owner.byPin", query = "Select o from Owner o where o.pin = :pin")
+	@NamedQuery(name = "owner.bylastName", query = "Select o from Owner o where o.lastName = :lastName")
 })
 public class Owner {
 
 	private Long id;
 
-	private String firstName = "unknown";
-	private String pin = "";
-	private Date registrationDate = new Date();
+	private String firstName;
+	private String lastName;
 
-	private List<Car> cars = new ArrayList<Car>();
+	private List<Pet> pets = new ArrayList<Pet>();
+
+	public Owner(String firstName, String lastName){
+		this.firstName=firstName;
+		this.lastName=lastName;
+	}
+	public Owner(String firstName, String lastName, List<Pet> pet_id) {
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.pets=pet_id;
+	}
+
+	public Owner(Long id, String firstName, String lastName) {
+		this.id=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+	}
+	public Owner(){
+		
+	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getFirstName() {
+
+	public String getfirstName() {
 		return firstName;
 	}
-	public void setFirstName(String firstName) {
+
+	public void setfirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	@Column(unique = true, nullable = false)
-	public String getPin() {
-		return pin;
-	}
-	public void setPin(String pin) {
-		this.pin = pin;
+	public String getlastName() {
+		return lastName;
 	}
 
-	@Temporal(TemporalType.DATE)
-	public Date getRegistrationDate() {
-		return registrationDate;
-	}
-	public void setRegistrationDate(Date registrationDate) {
-		this.registrationDate = registrationDate;
+	public void setlastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	// Be careful here, both with lazy and eager fetch type
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	public List<Car> getCars() {
-		return cars;
+	public List<Pet> getPets() {
+		return pets;
 	}
-	public void setCars(List<Car> cars) {
-		this.cars = cars;
+	
+	public void setPets(List<Pet> pets) {
+		this.pets =  pets;
 	}
+	
 }
