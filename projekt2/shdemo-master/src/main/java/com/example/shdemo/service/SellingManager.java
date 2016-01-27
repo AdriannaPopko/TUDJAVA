@@ -21,6 +21,6 @@ public interface SellingManager {
 	List<Pet> getAllPets();
 	Pet findPetById(Pet pet);
 	List<Pet> findPetBySpecies(String species);
-	void addPetToUser(Pet pet, Owner owner);
+	void addPetToOwner(Pet pet, Owner owner);
 
 }
