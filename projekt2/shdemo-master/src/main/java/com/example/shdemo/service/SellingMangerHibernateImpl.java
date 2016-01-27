@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.shdemo.domain.Pet;
-import com.example.domain.Bouquet;
-import com.example.domain.User;
 import com.example.shdemo.domain.Owner;
 
 @Component
@@ -29,71 +27,71 @@ public class SellingMangerHibernateImpl implements SellingManager {
 	}
 	
 	@Override
-	public void deleteUser(User user) {
-		sessionFactory.getCurrentSession().delete(user);	
+	public void deleteOwner(Owner owner) {
+		sessionFactory.getCurrentSession().delete(owner);	
 	}
 	
 	@Override
-	public List<User> getAllUsers() {
-		return sessionFactory.getCurrentSession().getNamedQuery("user.all").list();
+	public List<Owner> getAllOwners() {
+		return sessionFactory.getCurrentSession().getNamedQuery("owner.all").list();
 	}
 	@Override
-	public void updateUser(User user) {
-		sessionFactory.getCurrentSession().merge(user);
+	public void updateOwner(Owner owner) {
+		sessionFactory.getCurrentSession().merge(owner);
 	}
 	@Override
-	public User findUserById(User user) {
-		return (User) sessionFactory.getCurrentSession().get(User.class, user.getId());
+	public Owner findOwnerById(Owner owner) {
+		return (Owner) sessionFactory.getCurrentSession().get(Owner.class, owner.getId());
 	}
 	@Override
-	public void addUser(User user) {
-		sessionFactory.getCurrentSession().persist(user);
+	public void addOwner(Owner owner) {
+		sessionFactory.getCurrentSession().persist(owner);
 	}
 	@Override
-	public User findUserByNick(String nick) {
-		return (User) sessionFactory.getCurrentSession().getNamedQuery("user.byNick").setString("nick",nick).list();
+	public Owner findOwnerBylastName(String lastName) {
+		return (Owner) sessionFactory.getCurrentSession().getNamedQuery("owner.bylastName").setString("lastName",lastName).list();
 	}
 	
 	
 	
 	
 	@Override
-	public void addNewBouquet(Bouquet bouquet) {
-		sessionFactory.getCurrentSession().persist(bouquet);	
+	public void addNewPet(Pet pet) {
+		sessionFactory.getCurrentSession().persist(pet);	
 	}
 	@Override
-	public Bouquet findBouquetById(Bouquet bouquet) {
-		return (Bouquet) sessionFactory.getCurrentSession().get(Bouquet.class, bouquet.getId());
+	public Pet findPetById(Pet pet) {
+		return (Pet) sessionFactory.getCurrentSession().get(Pet.class, pet.getId());
 	}
 	@Override
-	public List<Bouquet> findBouquetByColor(String color) {
-		return sessionFactory.getCurrentSession().getNamedQuery("bouquet.color").setString("color", color).list();
+	public List<Pet> findPetBySpecies(String species) {
+		return sessionFactory.getCurrentSession().getNamedQuery("pet.species").setString("species", species).list();
 	}
 	@Override
-	public void updateBouquet(Bouquet bouquet) {
-		sessionFactory.getCurrentSession().merge(bouquet);	
+	public void updatePet(Pet pet) {
+		sessionFactory.getCurrentSession().merge(pet);	
 		
 	}
 	//usuawnie kaskadowe
-	public void deleteBouquet(User user, Bouquet bouquet) {
-		sessionFactory.getCurrentSession().delete(bouquet);
-		user.setBouquets(null);
+	public void deletePet(Owner owner, Pet pet) {
+		sessionFactory.getCurrentSession().delete(pet);
+		owner.setPets(null);
 	}
 	
 	@Override
-	public List<Bouquet> getAllBouquets() {
-		return sessionFactory.getCurrentSession().getNamedQuery("bouquet.all").list();
+	public List<Pet> getAllPets() {
+		return sessionFactory.getCurrentSession().getNamedQuery("pet.all").list();
 	}
 
 	@Override
-	public List<Bouquet> findUserByBouquet(User user) {
-		User u = (User) sessionFactory.getCurrentSession().get(User.class, user.getId());
-		return u.getBouquets();
+	public List<Pet> findOwnerByPet(Owner owner) {
+		Owner o = (Owner) sessionFactory.getCurrentSession().get(Owner.class, owner.getId());
+		return o.getPets();
 	}
 	
 	@Override
-	public void addBouquetToUser(Bouquet bouquet, User user) {
-		User u = (User) sessionFactory.getCurrentSession().get(User.class, user.getId());
-		u.getBouquets().add(bouquet);
+	public void addPetToOwner(Pet pet, Owner owner) {
+		Owner o = (Owner) sessionFactory.getCurrentSession().get(Owner.class, owner.getId());
+		o.getPets().add(pet);
 	}
 }
