@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.shdemo.domain.Car;
-import com.example.shdemo.domain.Person;
+import com.example.shdemo.domain.Pet;
+import com.example.domain.Bouquet;
+import com.example.domain.User;
+import com.example.shdemo.domain.Owner;
 
 @Component
 @Transactional
@@ -27,93 +29,71 @@ public class SellingMangerHibernateImpl implements SellingManager {
 	}
 	
 	@Override
-	public void addClient(Person person) {
-		person.setId(null);
-		sessionFactory.getCurrentSession().persist(person);
+	public void deleteUser(User user) {
+		sessionFactory.getCurrentSession().delete(user);	
 	}
 	
 	@Override
-	public void deleteClient(Person person) {
-		person = (Person) sessionFactory.getCurrentSession().get(Person.class,
-				person.getId());
+	public List<User> getAllUsers() {
+		return sessionFactory.getCurrentSession().getNamedQuery("user.all").list();
+	}
+	@Override
+	public void updateUser(User user) {
+		sessionFactory.getCurrentSession().merge(user);
+	}
+	@Override
+	public User findUserById(User user) {
+		return (User) sessionFactory.getCurrentSession().get(User.class, user.getId());
+	}
+	@Override
+	public void addUser(User user) {
+		sessionFactory.getCurrentSession().persist(user);
+	}
+	@Override
+	public User findUserByNick(String nick) {
+		return (User) sessionFactory.getCurrentSession().getNamedQuery("user.byNick").setString("nick",nick).list();
+	}
+	
+	
+	
+	
+	@Override
+	public void addNewBouquet(Bouquet bouquet) {
+		sessionFactory.getCurrentSession().persist(bouquet);	
+	}
+	@Override
+	public Bouquet findBouquetById(Bouquet bouquet) {
+		return (Bouquet) sessionFactory.getCurrentSession().get(Bouquet.class, bouquet.getId());
+	}
+	@Override
+	public List<Bouquet> findBouquetByColor(String color) {
+		return sessionFactory.getCurrentSession().getNamedQuery("bouquet.color").setString("color", color).list();
+	}
+	@Override
+	public void updateBouquet(Bouquet bouquet) {
+		sessionFactory.getCurrentSession().merge(bouquet);	
 		
-		// lazy loading here
-		for (Car car : person.getCars()) {
-			car.setSold(false);
-			sessionFactory.getCurrentSession().update(car);
-		}
-		sessionFactory.getCurrentSession().delete(person);
+	}
+	//usuawnie kaskadowe
+	public void deleteBouquet(User user, Bouquet bouquet) {
+		sessionFactory.getCurrentSession().delete(bouquet);
+		user.setBouquets(null);
+	}
+	
+	@Override
+	public List<Bouquet> getAllBouquets() {
+		return sessionFactory.getCurrentSession().getNamedQuery("bouquet.all").list();
 	}
 
 	@Override
-	public List<Car> getOwnedCars(Person person) {
-		person = (Person) sessionFactory.getCurrentSession().get(Person.class,
-				person.getId());
-		// lazy loading here - try this code without (shallow) copying
-		List<Car> cars = new ArrayList<Car>(person.getCars());
-		return cars;
+	public List<Bouquet> findUserByBouquet(User user) {
+		User u = (User) sessionFactory.getCurrentSession().get(User.class, user.getId());
+		return u.getBouquets();
 	}
-
+	
 	@Override
-	@SuppressWarnings("unchecked")
-	public List<Person> getAllClients() {
-		return sessionFactory.getCurrentSession().getNamedQuery("person.all")
-				.list();
+	public void addBouquetToUser(Bouquet bouquet, User user) {
+		User u = (User) sessionFactory.getCurrentSession().get(User.class, user.getId());
+		u.getBouquets().add(bouquet);
 	}
-
-	@Override
-	public Person findClientByPin(String pin) {
-		return (Person) sessionFactory.getCurrentSession().getNamedQuery("person.byPin").setString("pin", pin).uniqueResult();
-	}
-
-
-	@Override
-	public Long addNewCar(Car car) {
-		car.setId(null);
-		return (Long) sessionFactory.getCurrentSession().save(car);
-	}
-
-	@Override
-	public void sellCar(Long personId, Long carId) {
-		Person person = (Person) sessionFactory.getCurrentSession().get(
-				Person.class, personId);
-		Car car = (Car) sessionFactory.getCurrentSession()
-				.get(Car.class, carId);
-		car.setSold(true);
-		person.getCars().add(car);
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Car> getAvailableCars() {
-		return sessionFactory.getCurrentSession().getNamedQuery("car.unsold")
-				.list();
-	}
-	@Override
-	public void disposeCar(Person person, Car car) {
-
-		person = (Person) sessionFactory.getCurrentSession().get(Person.class,
-				person.getId());
-		car = (Car) sessionFactory.getCurrentSession().get(Car.class,
-				car.getId());
-
-		Car toRemove = null;
-		// lazy loading here (person.getCars)
-		for (Car aCar : person.getCars())
-			if (aCar.getId().compareTo(car.getId()) == 0) {
-				toRemove = aCar;
-				break;
-			}
-
-		if (toRemove != null)
-			person.getCars().remove(toRemove);
-
-		car.setSold(false);
-	}
-
-	@Override
-	public Car findCarById(Long id) {
-		return (Car) sessionFactory.getCurrentSession().get(Car.class, id);
-	}
-
 }
