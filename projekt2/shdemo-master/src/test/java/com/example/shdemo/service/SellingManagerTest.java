@@ -156,8 +156,8 @@ public class SellingManagerTest {
 		assertEquals(FNAME_1, retrievedOwner.getfirstName());
 		assertEquals(LNAME_1, retrievedOwner.getlastName());
 		
-		retrievedOwner.setfirstName(FNAME_1);
-		retrievedOwner.setlastName(LNAME_1);
+		retrievedOwner.setfirstName(FNAME_2);
+		retrievedOwner.setlastName(LNAME_2);
 		sellingManager.updateOwner(retrievedOwner);
 		
 		Owner retrievedOwner2 = sellingManager.findOwnerById(retrievedOwner);
@@ -280,7 +280,7 @@ public class SellingManagerTest {
 		sellingManager.addNewPet(pet);
 		
 		Pet retrievedPet = sellingManager.findPetById(pet);
-		assertEquals(NAME_2, retrievedPet.getName());
+		assertEquals(NAME_1, retrievedPet.getName());
 		assertEquals(SPECIES_1, retrievedPet.getSpecies());
 		
 		Pet pet2 = new Pet(NAME_2, SPECIES_1);
