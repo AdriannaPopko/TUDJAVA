@@ -1,0 +1,34 @@
+target/
+*.class
+
+logs/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+
+*.tmp
+*.bak
+*.swp
+.classpath
+.settings/
+.loadpath
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#Logs
+*.log
