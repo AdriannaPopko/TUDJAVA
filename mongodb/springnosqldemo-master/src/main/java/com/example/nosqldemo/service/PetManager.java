@@ -25,14 +25,14 @@ public class PetManager {
     public void updatePet(Pet pet, String species) {
     	pet.setSpecies(species);
     }
-    public List<Owner> getPersInRoom(Pet pet) { return pet.getOwners();}
-    public void deletePerInRoom(Pet pet,Owner owner){
+    public List<Owner> getOwnersByPet(Pet pet) { return pet.getOwners();}
+    public void deleteOwnerByPet(Pet pet,Owner owner){
     	pet.getOwners().remove(owner);
     	petRepository.save(pet);
         ownerRepository.delete(owner);
     }
     public Iterable<Pet> findAllPet() { return petRepository.findAll(); }
-    public void deleteOwnersInPetByLname(Pet pet, String lname){
+    public void deleteOwnersByPetByLname(Pet pet, String lname){
         List<Owner> ownerList = pet.getOwners();
         for(int i = 0; i < ownerList.size();i++){
             if(ownerList.get(i).getLname() == lname) {

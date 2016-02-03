@@ -40,7 +40,7 @@ public class Pet {
         return this.owners;
     }
 
-    public void setPers(List<Owner> owners) {
+    public void setOwners(List<Owner> owners) {
         this.owners = owners;
     }
 
