@@ -75,7 +75,7 @@ public class PetManagerTest {
         }
     }
     @Test
-    public void checkFindOwnersInPet(){
+    public void checkFindOwnersByPet(){
         Pet pet = new Pet();
         pet.setName("name");
 
@@ -103,7 +103,7 @@ public class PetManagerTest {
     }
 
     @Test
-    public void checkDeleteOwnerbyPet(){
+    public void checkDeleteOwnerByPet(){
         Pet pet = new Pet();
         pet.setName("name");
 
@@ -135,7 +135,7 @@ public class PetManagerTest {
     }
 
     @Test
-    public void checkDeleteOwnersbyPetByLname() {
+    public void checkDeletePetOwnersByLname() {
         Pet pet = new Pet();
         pet.setName("name");
 
@@ -161,7 +161,7 @@ public class PetManagerTest {
         ownerList.add(owner2);
         pet.setOwners(ownerList);
         petManager.addPet(pet);
-        petManager.deleteOwnersByPetByLname(pet, owner.getLname());
+        petManager.deletePetOwnersByLname(pet, owner.getLname());
         List<Owner> owners = petManager.getOwnersByPet(pet);
 
         assertEquals(owners.size(), 2);

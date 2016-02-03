@@ -32,7 +32,7 @@ public class PetManager {
         ownerRepository.delete(owner);
     }
     public Iterable<Pet> findAllPet() { return petRepository.findAll(); }
-    public void deleteOwnersByPetByLname(Pet pet, String lname){
+    public void deletePetOwnersByLname(Pet pet, String lname){
         List<Owner> ownerList = pet.getOwners();
         for(int i = 0; i < ownerList.size();i++){
             if(ownerList.get(i).getLname() == lname) {
