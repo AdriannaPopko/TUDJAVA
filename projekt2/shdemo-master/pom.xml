@@ -200,6 +200,12 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		
+	<dependency>
+		<groupId>org.bitbucket.dollar</groupId>
+		<artifactId>dollar</artifactId>
+		<version>1.0-beta3</version>
+	</dependency>		
 	</dependencies>
 
 	<!-- Additional useful plugin's configuration -->

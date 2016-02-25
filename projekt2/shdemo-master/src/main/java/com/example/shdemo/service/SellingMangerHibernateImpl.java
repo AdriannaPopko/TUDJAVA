@@ -1,6 +1,5 @@
 package com.example.shdemo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -8,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.shdemo.domain.Pet;
 import com.example.shdemo.domain.Owner;
+import com.example.shdemo.domain.Pet;
 
 @Component
 @Transactional
@@ -31,6 +30,7 @@ public class SellingMangerHibernateImpl implements SellingManager {
 		sessionFactory.getCurrentSession().delete(owner);	
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Owner> getAllOwners() {
 		return sessionFactory.getCurrentSession().getNamedQuery("owner.all").list();
@@ -63,6 +63,7 @@ public class SellingMangerHibernateImpl implements SellingManager {
 	public Pet findPetById(Pet pet) {
 		return (Pet) sessionFactory.getCurrentSession().get(Pet.class, pet.getId());
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pet> findPetBySpecies(String species) {
 		return sessionFactory.getCurrentSession().getNamedQuery("pet.species").setString("species", species).list();
@@ -72,12 +73,13 @@ public class SellingMangerHibernateImpl implements SellingManager {
 		sessionFactory.getCurrentSession().merge(pet);	
 		
 	}
-	//usuawnie kaskadowe
-	public void deletePet(Owner owner, Pet pet) {
+	
+	public void deletePet(Pet pet) {
 		sessionFactory.getCurrentSession().delete(pet);
-		owner.setPets(null);
+		//owner.setPets(null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pet> getAllPets() {
 		return sessionFactory.getCurrentSession().getNamedQuery("pet.all").list();

@@ -17,7 +17,7 @@ public interface SellingManager {
 	
 	void addNewPet(Pet pet);
 	void updatePet(Pet pet);
-	void deletePet(Owner owner,Pet pet);
+	void deletePet(Pet pet);
 	List<Pet> getAllPets();
 	Pet findPetById(Pet pet);
 	List<Pet> findPetBySpecies(String species);
